@@ -2,7 +2,7 @@
 Python library for representing Partially Ordered sets via Hasse Diagrams.
 
 [![Build Status](https://cloud.drone.io/api/badges/mvcisback/hasse/status.svg)](https://cloud.drone.io/mvcisback/hasse)
-[![PyPI version](https://badge.fury.io/py/exp4.svg)](https://badge.fury.io/py/hasse)
+[![PyPI version](https://badge.fury.io/py/hasse.svg)](https://badge.fury.io/py/hasse)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Table of Contents**
@@ -39,6 +39,7 @@ poset = hasse.PoSet.from_chains(
 # Test membership and size.
 assert 2 in poset
 assert len(poset) == 4
+assert set(poset) == {1,2,3,4}
 
 # Perform pair wise comparison.
 assert poset.compare(1, 1) == '='
