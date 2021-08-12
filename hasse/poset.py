@@ -39,8 +39,9 @@ class PoSet:
        return elem in self.hasse.nodes
 
    def add(self, chain: Chain) -> PoSet:
-       nx.add_path(self.hasse, chain)
-       return attr.evolve(self, hasse=nx.transitive_reduction(self.hasse))
+       hasse = nx.DiGraph(self.hasse)
+       nx.add_path(hasse, chain)
+       return attr.evolve(self, hasse=nx.transitive_reduction(hasse))
 
    @staticmethod
    def from_chains(self, *chains: list[Chain]) -> PoSet:

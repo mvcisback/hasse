@@ -20,6 +20,11 @@ def test_smoke():
 
     assert 0b000 in poset
     assert 'x' not in poset
-    assert poset.add(['x'])
-    assert 'x' in poset
-    assert 0b000 in poset
+
+    poset2 = poset.add(['x'])
+    assert 'x' not in poset
+    assert 'x' in poset2
+    assert 0b000 in poset2
+
+    poset3 = poset.add([0b010, 0b001])
+    assert poset3.compare(0b010, 0b001) == '<'
