@@ -44,7 +44,7 @@ class PoSet:
        return attr.evolve(self, hasse=nx.transitive_reduction(hasse))
 
    @staticmethod
-   def from_chains(self, *chains: list[Chain]) -> PoSet:
+   def from_chains(*chains: list[Chain]) -> PoSet:
        hasse = nx.DiGraph()
        for chain in chains:
            nx.add_path(hasse, chain)
