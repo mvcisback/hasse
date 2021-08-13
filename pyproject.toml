@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hasse"
 readme="README.md"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python library for representing Partially Ordered sets via Hasse Diagrams."
 authors = ["Marcell Vazquez-Chanlatte <mvc@linux.com>"]
 license = "MIT"
