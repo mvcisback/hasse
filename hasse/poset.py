@@ -20,6 +20,10 @@ class PoSet:
    """
    hasse: nx.DiGraph = attr.ib(factory=nx.DiGraph)
 
+   def __attrs_post_init__(self) -> None:
+       if not nx.is_directed_acyclic_graph(self.hasse):
+           raise ValueError("PoSet must be a DAG (directed acyclic graph)")   
+   
    def __len__(self) -> int:
        return len(self.hasse)
 
