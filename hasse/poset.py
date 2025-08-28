@@ -41,6 +41,8 @@ class PoSet:
    def add(self, chain: Chain) -> PoSet:
        hasse = nx.DiGraph(self.hasse)
        nx.add_path(hasse, chain)
+       if not nx.is_directed_acyclic_graph(hasse):
+           raise ValueError(f"Adding chain {chain} introduces a cycle")
        return attr.evolve(self, hasse=nx.transitive_reduction(hasse))
 
    @staticmethod
@@ -48,4 +50,6 @@ class PoSet:
        hasse = nx.DiGraph()
        for chain in chains:
            nx.add_path(hasse, chain)
+       if not nx.is_directed_acyclic_graph(hasse):
+            raise ValueError(f"Chains {chains} introduce a cycle")
        return PoSet(nx.transitive_reduction(hasse))
