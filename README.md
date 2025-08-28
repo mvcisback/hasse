@@ -51,3 +51,4 @@ assert poset.compare(2, 3) == '||'
 poset2 = poset.add([2, 1])
 poset2.compare(1, 2) == '='
 ```
+PoSet must be a DAG.  For large posets we encourage batching via from_chains over many small add() calls.
