@@ -25,8 +25,11 @@ class PoSet:
        #H = nx.DiGraph()
        #H.add_edges_from([(0, 1), (1, 0)])  # cycle
        #P = hasse.PoSet(H)
-       if not nx.is_directed_acyclic_graph(self.hasse):
-           raise ValueError("PoSet must be a DAG (directed acyclic graph)")   
+       try:
+           reduced = nx.transitive_reduction(self.hasse)
+       except nx.NetworkXError:
+           raise ValueError("PoSet must be a DAG (directed acyclic graph)")
+       object.__setattr__(self, "hasse", reduced)
           
    
    def __len__(self) -> int:
@@ -50,11 +53,11 @@ class PoSet:
    def add(self, chain: Chain) -> PoSet:
        hasse = nx.DiGraph(self.hasse)
        nx.add_path(hasse, chain)
-       return attr.evolve(self, hasse=nx.transitive_reduction(hasse))
+       return attr.evolve(self, hasse=hasse)
 
    @staticmethod
    def from_chains(*chains: list[Chain]) -> PoSet:
        hasse = nx.DiGraph()
        for chain in chains:
            nx.add_path(hasse, chain)
-       return PoSet(nx.transitive_reduction(hasse))
+       return PoSet(hasse)
